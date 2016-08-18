@@ -4,44 +4,50 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-
-/* JSON */
-var foo = {
-	name: "안대혁",
-	nick: "kickscar",
-	aNumber: 5,
-	doFoo: function(){
-		alert( "I'm " + this.name );
-	}
-};
-
-foo.doFoo();
-
-//=====================================================
-
 /* function을 이용한 여러 객체 생성 방법 */
-
-var Foo = function( name, nick ) {
+var employee = function(name, title){
 	this.name = name;
-	this.nick = nick;
-	this.aNumber = 5;
-	this.doFoo = function() {
-		alert( "I'm " + this.name );
-	};
-};
-
-var foo1 = new Foo("안대혁1", "kickscar1");
-foo1.address = "서울시";
-foo1.f = function(){
+	this.title = title;
+	this.info = function(){
+		console.log(this.name + ":" + this.title);
+	}
 }
 
-var foo2 = new Foo("안대혁2", "kickscar2");
+var e1 = new employee("둘리", "백수1");
+e1.info();
 
-foo1.doFoo();
-foo2.doFoo();
+var e2 = new employee("마이콜", "가수지망생");
+e2.info();
 
-foo1.f();
+var e3 = new employee("희동이", "애기");
+e3.info();
 
+/* function을 이용한 여러 객체 생성 방법(prototype 기반의 객체 생성) */
+var employee2 = function(name, title){
+	this.name = name;
+	this.title = title;
+}
+
+employee2.prototype.info = function(){
+	console.log(this.name + ":" + this.title);
+}
+
+employee2.prototype.boss = "고길동";
+
+var e1 = new employee2("둘리", "백수1");
+e1.info();
+
+var e2 = new employee2("마이콜", "가수지망생");
+e2.info();
+
+var e3 = new employee2("희동이", "애기");
+e3.info();
+/* 재정의 */
+e3.boss = "아기공룡둘리";
+e3.info = function(){
+	console.log(this.boss + ":" + this.name + ":" + this.title);
+}
+e3.info();
 </script>
 </head>
 <body>
